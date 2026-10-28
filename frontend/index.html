@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="TaskMate - AI-Powered Personal Task Manager with Intelligent FAQ and Error Troubleshooting.">
+  <title>TaskMate — AI-Powered Task Manager</title>
+  
+  <link rel="icon" type="image/svg+xml" href="/assets/logo.svg">
+  <link rel="stylesheet" href="/css/styles.css">
+  <link rel="stylesheet" href="/css/responsive.css">
+  <link rel="stylesheet" href="/css/chat.css">
+</head>
+<body>
+
+  <!-- Site Navigation -->
+  <header class="site-header">
+    <div class="container nav-container">
+      <a href="/" class="brand-logo" id="nav-brand">
+        <img src="/assets/logo.svg" alt="TaskMate Logo" width="34" height="34">
+        <span>Task<span>Mate</span></span>
+      </a>
+
+      <button class="mobile-menu-btn" aria-label="Toggle navigation menu" id="mobile-toggle-btn">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <line x1="3" y1="12" x2="21" y2="12"></line>
+          <line x1="3" y1="6" x2="21" y2="6"></line>
+          <line x1="3" y1="18" x2="21" y2="18"></line>
+        </svg>
+      </button>
+
+      <ul class="nav-links" id="main-nav-links">
+        <li><a href="/" class="nav-link active" id="nav-home">Home</a></li>
+        <li><a href="/faq" class="nav-link" id="nav-faq">FAQ</a></li>
+        <li><a href="/errors" class="nav-link" id="nav-errors">Error Guide</a></li>
+        <li><a href="/about" class="nav-link" id="nav-about">About</a></li>
+      </ul>
+
+      <div class="nav-actions">
+        <button class="btn btn-outline btn-sm" onclick="window.TaskMateChat && window.TaskMateChat.open()" id="nav-ai-btn">
+          🤖 AI Assistant
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero" id="hero-section">
+    <div class="container">
+      <h1 class="hero-title">Organize Your Day. Get More Done.</h1>
+      <p class="hero-subtitle">
+        TaskMate helps you manage everyday tasks and get instant assistance when you need it.
+      </p>
+      <div class="hero-actions">
+        <a href="#dashboard-section" class="btn btn-primary" id="hero-cta-btn">
+          Go to Dashboard ↓
+        </a>
+        <button class="btn btn-secondary" onclick="window.TaskMateChat && window.TaskMateChat.open()" id="hero-assistant-btn">
+          Ask AI Assistant
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Main Content Area -->
+  <main class="container" id="dashboard-section" style="padding-top: 2.5rem; padding-bottom: 4rem;">
+
+    <!-- Task Statistics Grid -->
+    <section class="stats-grid" aria-label="Task Statistics">
+      <div class="stat-card" id="card-stat-total">
+        <div class="stat-icon total">📋</div>
+        <div class="stat-info">
+          <h4>Total Tasks</h4>
+          <div class="stat-value" id="stat-total">0</div>
+        </div>
+      </div>
+
+      <div class="stat-card" id="card-stat-pending">
+        <div class="stat-icon pending">⏳</div>
+        <div class="stat-info">
+          <h4>Pending</h4>
+          <div class="stat-value" id="stat-pending">0</div>
+        </div>
+      </div>
+
+      <div class="stat-card" id="card-stat-completed">
+        <div class="stat-icon completed">✅</div>
+        <div class="stat-info">
+          <h4>Completed</h4>
+          <div class="stat-value" id="stat-completed">0</div>
+        </div>
+      </div>
+
+      <div class="stat-card" id="card-stat-rate">
+        <div class="stat-icon rate">📊</div>
+        <div class="stat-info">
+          <h4>Completion</h4>
+          <div class="stat-value" id="stat-rate">0%</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Add Task Form Card -->
+    <section class="card" style="margin-bottom: 2.5rem;" aria-label="Create Task Section">
+      <h2 style="font-size: 1.35rem; margin-bottom: 1.25rem; display: flex; align-items: center; gap: 0.5rem;">
+        <span>➕</span> Add New Task
+      </h2>
+      <form id="add-task-form">
+        <div class="form-group">
+          <label class="form-label" for="task-title-input">Task Title <span class="required">*</span></label>
+          <input 
+            type="text" 
+            name="title" 
+            id="task-title-input" 
+            class="form-control" 
+            placeholder="e.g. Complete software architecture report" 
+            maxlength="255" 
+            required 
+          />
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="task-desc-input">Description (Optional)</label>
+          <textarea 
+            name="description" 
+            id="task-desc-input" 
+            class="form-control" 
+            placeholder="Add relevant notes, links, or task requirements..."
+          ></textarea>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label" for="task-priority-select">Priority <span class="required">*</span></label>
+            <select name="priority" id="task-priority-select" class="form-control">
+              <option value="Low">Low Priority</option>
+              <option value="Medium" selected>Medium Priority</option>
+              <option value="High">High Priority</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="task-due-date-input">Due Date (Optional)</label>
+            <input 
+              type="date" 
+              name="due_date" 
+              id="task-due-date-input" 
+              class="form-control" 
+            />
+          </div>
+        </div>
+
+        <div style="display: flex; gap: 0.75rem; justify-content: flex-end; margin-top: 0.5rem;">
+          <button type="button" class="btn btn-secondary" id="clear-task-btn">Clear</button>
+          <button type="submit" class="btn btn-primary" id="submit-task-btn">Add Task</button>
+        </div>
+      </form>
+    </section>
+
+    <!-- Task List Filter Bar -->
+    <div class="filter-bar">
+      <h2 style="font-size: 1.45rem; margin: 0;">My Tasks</h2>
+      <div class="filter-tabs" role="tablist" aria-label="Task status filters">
+        <button type="button" class="filter-tab active" data-filter="all" id="filter-all">All Tasks</button>
+        <button type="button" class="filter-tab" data-filter="pending" id="filter-pending">Pending</button>
+        <button type="button" class="filter-tab" data-filter="completed" id="filter-completed">Completed</button>
+      </div>
+    </div>
+
+    <!-- Dynamic Task Cards Container -->
+    <div id="task-list-container" class="task-list" aria-live="polite">
+      <div class="empty-state">
+        <div class="empty-icon">⏳</div>
+        <p>Loading your tasks...</p>
+      </div>
+    </div>
+
+    <!-- Daily Programming Joke Card -->
+    <section class="joke-card" id="programming-joke" aria-label="Programming Joke Card">
+      <div class="joke-icon">💡</div>
+      <div class="joke-body">
+        <p class="joke-setup">Fetching a fresh programming joke...</p>
+        <p class="joke-punchline" style="color: var(--text-muted);">One moment...</p>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Edit Task Modal -->
+  <div id="edit-task-modal" class="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="edit-modal-title">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3 id="edit-modal-title" style="margin: 0;">✏️ Edit Task</h3>
+        <button type="button" class="btn btn-secondary btn-sm" onclick="closeModal('edit-task-modal')">✕</button>
+      </div>
+      <form id="edit-task-form">
+        <input type="hidden" name="task_id" id="edit-task-id" />
+        <div class="modal-body">
+          <div class="form-group">
+            <label class="form-label" for="edit-title">Task Title <span class="required">*</span></label>
+            <input type="text" name="title" id="edit-title" class="form-control" maxlength="255" required />
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="edit-description">Description</label>
+            <textarea name="description" id="edit-description" class="form-control"></textarea>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label" for="edit-priority">Priority</label>
+              <select name="priority" id="edit-priority" class="form-control">
+                <option value="Low">Low</option>
+                <option value="Medium">Medium</option>
+                <option value="High">High</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="edit-due-date">Due Date</label>
+              <input type="date" name="due_date" id="edit-due-date" class="form-control" />
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" onclick="closeModal('edit-task-modal')">Cancel</button>
+          <button type="submit" class="btn btn-primary" id="save-task-edit-btn">Save Changes</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="container footer-content">
+      <div>
+        <p style="margin: 0; font-weight: 600; color: var(--text-primary);">TaskMate — AI-Powered Task Manager</p>
+        <p style="margin: 0; font-size: 0.8rem; color: var(--text-muted);">Final Assessment Software Project</p>
+      </div>
+      <div style="display: flex; gap: 1.25rem; font-size: 0.85rem;">
+        <a href="/">Home</a>
+        <a href="/faq">FAQ</a>
+        <a href="/errors">Error Guide</a>
+        <a href="/about">About</a>
+        <a href="/health" target="_blank">System Health</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="/js/api.js"></script>
+  <script src="/js/app.js"></script>
+  <script src="/js/tasks.js"></script>
+  <script src="/js/chat.js"></script>
+</body>
+</html>

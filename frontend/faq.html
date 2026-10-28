@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Frequently Asked Questions about TaskMate task manager, MySQL database, and AI assistant.">
+  <title>Frequently Asked Questions — TaskMate</title>
+  
+  <link rel="icon" type="image/svg+xml" href="/assets/logo.svg">
+  <link rel="stylesheet" href="/css/styles.css">
+  <link rel="stylesheet" href="/css/responsive.css">
+  <link rel="stylesheet" href="/css/chat.css">
+</head>
+<body>
+
+  <!-- Site Navigation -->
+  <header class="site-header">
+    <div class="container nav-container">
+      <a href="/" class="brand-logo" id="nav-brand">
+        <img src="/assets/logo.svg" alt="TaskMate Logo" width="34" height="34">
+        <span>Task<span>Mate</span></span>
+      </a>
+
+      <button class="mobile-menu-btn" aria-label="Toggle navigation menu" id="mobile-toggle-btn">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <line x1="3" y1="12" x2="21" y2="12"></line>
+          <line x1="3" y1="6" x2="21" y2="6"></line>
+          <line x1="3" y1="18" x2="21" y2="18"></line>
+        </svg>
+      </button>
+
+      <ul class="nav-links" id="main-nav-links">
+        <li><a href="/" class="nav-link" id="nav-home">Home</a></li>
+        <li><a href="/faq" class="nav-link active" id="nav-faq">FAQ</a></li>
+        <li><a href="/errors" class="nav-link" id="nav-errors">Error Guide</a></li>
+        <li><a href="/about" class="nav-link" id="nav-about">About</a></li>
+      </ul>
+
+      <div class="nav-actions">
+        <button class="btn btn-outline btn-sm" onclick="window.TaskMateChat && window.TaskMateChat.open()" id="nav-ai-btn">
+          🤖 AI Assistant
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Header -->
+  <section class="hero">
+    <div class="container">
+      <h1 class="hero-title">Frequently Asked Questions</h1>
+      <p class="hero-subtitle">
+        Find quick answers regarding task organization, priority management, database storage, and AI assistant capabilities.
+      </p>
+      
+      <!-- Search Bar -->
+      <div style="max-width: 580px; margin: 0 auto; position: relative;">
+        <input 
+          type="text" 
+          id="faq-search-input" 
+          class="form-control" 
+          placeholder="Search questions (e.g. priority, delete, storage)..." 
+          style="padding: 0.85rem 1.25rem; font-size: 1rem; border-radius: var(--radius-full); box-shadow: var(--shadow-sm);"
+        />
+      </div>
+    </div>
+  </section>
+
+  <!-- Main Content -->
+  <main class="container" style="padding-top: 2.5rem; padding-bottom: 4rem;">
+    <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 1.5rem;">
+      <h2 style="font-size: 1.35rem; margin: 0;">Knowledge Base</h2>
+      <span class="badge" style="background-color: var(--primary-light); color: var(--primary); font-size: 0.85rem;" id="faq-count-badge">
+        Loading...
+      </span>
+    </div>
+
+    <!-- Accordion Container -->
+    <div id="faq-accordion" aria-live="polite">
+      <div class="empty-state">
+        <div class="empty-icon">⏳</div>
+        <p>Retrieving FAQs from MySQL database...</p>
+      </div>
+    </div>
+
+    <!-- Help Banner -->
+    <div class="card" style="margin-top: 3rem; background: linear-gradient(135deg, #ffffff 0%, var(--primary-light) 100%); border-color: #c7d2fe; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1.5rem;">
+      <div>
+        <h3 style="margin-bottom: 0.35rem;">Can't find what you are looking for?</h3>
+        <p style="margin: 0;">Our AI Assistant is grounded in our full knowledge base and can answer questions or create a support ticket for you.</p>
+      </div>
+      <button class="btn btn-primary" onclick="window.TaskMateChat && window.TaskMateChat.open()">
+        Ask the Assistant Now
+      </button>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="container footer-content">
+      <div>
+        <p style="margin: 0; font-weight: 600; color: var(--text-primary);">TaskMate — AI-Powered Task Manager</p>
+        <p style="margin: 0; font-size: 0.8rem; color: var(--text-muted);">Final Assessment Software Project</p>
+      </div>
+      <div style="display: flex; gap: 1.25rem; font-size: 0.85rem;">
+        <a href="/">Home</a>
+        <a href="/faq">FAQ</a>
+        <a href="/errors">Error Guide</a>
+        <a href="/about">About</a>
+        <a href="/health" target="_blank">System Health</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="/js/api.js"></script>
+  <script src="/js/app.js"></script>
+  <script src="/js/faq.js"></script>
+  <script src="/js/chat.js"></script>
+</body>
+</html>

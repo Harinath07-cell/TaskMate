@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="TaskMate HTTP Error Code Guide and Troubleshooting Manual. Understand 400, 401, 403, 404, 429, 500, 503, and DEV001.">
+  <title>Error Code Guide & Troubleshooting — TaskMate</title>
+  
+  <link rel="icon" type="image/svg+xml" href="/assets/logo.svg">
+  <link rel="stylesheet" href="/css/styles.css">
+  <link rel="stylesheet" href="/css/responsive.css">
+  <link rel="stylesheet" href="/css/chat.css">
+</head>
+<body>
+
+  <!-- Site Navigation -->
+  <header class="site-header">
+    <div class="container nav-container">
+      <a href="/" class="brand-logo" id="nav-brand">
+        <img src="/assets/logo.svg" alt="TaskMate Logo" width="34" height="34">
+        <span>Task<span>Mate</span></span>
+      </a>
+
+      <button class="mobile-menu-btn" aria-label="Toggle navigation menu" id="mobile-toggle-btn">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <line x1="3" y1="12" x2="21" y2="12"></line>
+          <line x1="3" y1="6" x2="21" y2="6"></line>
+          <line x1="3" y1="18" x2="21" y2="18"></line>
+        </svg>
+      </button>
+
+      <ul class="nav-links" id="main-nav-links">
+        <li><a href="/" class="nav-link" id="nav-home">Home</a></li>
+        <li><a href="/faq" class="nav-link" id="nav-faq">FAQ</a></li>
+        <li><a href="/errors" class="nav-link active" id="nav-errors">Error Guide</a></li>
+        <li><a href="/about" class="nav-link" id="nav-about">About</a></li>
+      </ul>
+
+      <div class="nav-actions">
+        <button class="btn btn-outline btn-sm" onclick="window.TaskMateChat && window.TaskMateChat.open()" id="nav-ai-btn">
+          🤖 AI Assistant
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Header -->
+  <section class="hero">
+    <div class="container">
+      <h1 class="hero-title">HTTP & Application Error Guide</h1>
+      <p class="hero-subtitle">
+        Understand standard HTTP status codes and custom TaskMate application errors with troubleshooting recommendations.
+      </p>
+      
+      <!-- Search Filter -->
+      <div style="max-width: 580px; margin: 0 auto;">
+        <input 
+          type="text" 
+          id="error-search-input" 
+          class="form-control" 
+          placeholder="Filter error codes (e.g. 404, 500, DEV001, unauthorized)..." 
+          style="padding: 0.85rem 1.25rem; font-size: 1rem; border-radius: var(--radius-full); box-shadow: var(--shadow-sm);"
+        />
+      </div>
+    </div>
+  </section>
+
+  <!-- Main Content -->
+  <main class="container" style="padding-top: 2.5rem; padding-bottom: 4rem;">
+    <!-- Intro Alert Card -->
+    <div class="card" style="margin-bottom: 2rem; border-left: 4px solid var(--primary); background-color: var(--primary-light);">
+      <h3 style="font-size: 1.1rem; color: var(--primary); margin-bottom: 0.35rem;">
+        ℹ️ Troubleshooting & Developer Guide
+      </h3>
+      <p style="margin: 0; font-size: 0.95rem; color: var(--text-primary);">
+        Each card below explains the status code meaning, root causes, and recommended solutions. You can also click <strong>⚡ Test API Call</strong> to test the real backend response status code, or <strong>💬 Ask Assistant</strong> to interactively troubleshoot with the AI assistant.
+      </p>
+    </div>
+
+    <!-- Error Cards List -->
+    <div id="error-cards-container" aria-live="polite">
+      <div class="empty-state">
+        <div class="empty-icon">⏳</div>
+        <p>Loading error specifications...</p>
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="container footer-content">
+      <div>
+        <p style="margin: 0; font-weight: 600; color: var(--text-primary);">TaskMate — AI-Powered Task Manager</p>
+        <p style="margin: 0; font-size: 0.8rem; color: var(--text-muted);">Final Assessment Software Project</p>
+      </div>
+      <div style="display: flex; gap: 1.25rem; font-size: 0.85rem;">
+        <a href="/">Home</a>
+        <a href="/faq">FAQ</a>
+        <a href="/errors">Error Guide</a>
+        <a href="/about">About</a>
+        <a href="/health" target="_blank">System Health</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="/js/api.js"></script>
+  <script src="/js/app.js"></script>
+  <script src="/js/errors.js"></script>
+  <script src="/js/chat.js"></script>
+</body>
+</html>

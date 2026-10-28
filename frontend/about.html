@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="About TaskMate - AI-Powered Task Manager Architecture and Student Assessment Project Details.">
+  <title>About & Architecture — TaskMate</title>
+  
+  <link rel="icon" type="image/svg+xml" href="/assets/logo.svg">
+  <link rel="stylesheet" href="/css/styles.css">
+  <link rel="stylesheet" href="/css/responsive.css">
+  <link rel="stylesheet" href="/css/chat.css">
+</head>
+<body>
+
+  <!-- Site Navigation -->
+  <header class="site-header">
+    <div class="container nav-container">
+      <a href="/" class="brand-logo" id="nav-brand">
+        <img src="/assets/logo.svg" alt="TaskMate Logo" width="34" height="34">
+        <span>Task<span>Mate</span></span>
+      </a>
+
+      <button class="mobile-menu-btn" aria-label="Toggle navigation menu" id="mobile-toggle-btn">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <line x1="3" y1="12" x2="21" y2="12"></line>
+          <line x1="3" y1="6" x2="21" y2="6"></line>
+          <line x1="3" y1="18" x2="21" y2="18"></line>
+        </svg>
+      </button>
+
+      <ul class="nav-links" id="main-nav-links">
+        <li><a href="/" class="nav-link" id="nav-home">Home</a></li>
+        <li><a href="/faq" class="nav-link" id="nav-faq">FAQ</a></li>
+        <li><a href="/errors" class="nav-link" id="nav-errors">Error Guide</a></li>
+        <li><a href="/about" class="nav-link active" id="nav-about">About</a></li>
+      </ul>
+
+      <div class="nav-actions">
+        <button class="btn btn-outline btn-sm" onclick="window.TaskMateChat && window.TaskMateChat.open()" id="nav-ai-btn">
+          🤖 AI Assistant
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Header -->
+  <section class="hero">
+    <div class="container">
+      <h1 class="hero-title">About TaskMate</h1>
+      <p class="hero-subtitle">
+        An AI-powered full-stack task management application developed for final project assessment.
+      </p>
+    </div>
+  </section>
+
+  <!-- Main Content -->
+  <main class="container" style="padding-top: 2.5rem; padding-bottom: 4rem;">
+    <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 2rem;">
+      
+      <!-- Left Column: Project Overview & Specs -->
+      <div>
+        <div class="card" style="margin-bottom: 2rem;">
+          <h2 style="font-size: 1.4rem;">🎯 Project Objective</h2>
+          <p>
+            TaskMate is designed to demonstrate proper full-stack software development practices in a maintainable, clean monolithic architecture. It provides an intuitive interface for managing personal tasks while featuring an intelligent grounded AI assistant that answers frequently asked questions, diagnoses HTTP errors, and generates support tickets.
+          </p>
+        </div>
+
+        <div class="card" style="margin-bottom: 2rem;">
+          <h2 style="font-size: 1.4rem;">✨ Core Features</h2>
+          <ul style="padding-left: 1.25rem; color: var(--text-secondary); line-height: 1.8;">
+            <li><strong>Task CRUD Operations:</strong> Create, view, edit, complete, reopen, and delete tasks with priority levels and due dates.</li>
+            <li><strong>Dynamic Dashboard Stats:</strong> Live calculations for Total, Pending, Completed, and Completion Percentage.</li>
+            <li><strong>Intelligent FAQ System:</strong> Relational FAQ search and accordion interface powered by MySQL.</li>
+            <li><strong>HTTP & Custom Error Guide:</strong> Deep explanations for HTTP 400, 401, 403, 404, 429, 500, 503, and DEV001 with interactive testing.</li>
+            <li><strong>Grounded AI Assistant:</strong> AI chatbot powered by Groq API (Llama 3.3) with offline grounding fallback.</li>
+            <li><strong>Support Ticket System:</strong> Automated ticket code generation (e.g. <code>TKT-2026-XXXX</code>) stored in MySQL.</li>
+            <li><strong>MongoDB Audit Logging:</strong> Full trace conversation and feedback storage with graceful offline degradation.</li>
+            <li><strong>External API Integration:</strong> Programming joke service with strict timeout and fallback safety.</li>
+            <li><strong>Health Check & Request Logging:</strong> Structured logging and <code>/health</code> status endpoint.</li>
+          </ul>
+        </div>
+
+        <div class="card" style="margin-bottom: 2rem;">
+          <h2 style="font-size: 1.4rem;">🏗️ Architectural Overview</h2>
+          <div style="background-color: var(--bg-subtle); padding: 1.25rem; border-radius: var(--radius-md); font-family: monospace; font-size: 0.85rem; line-height: 1.6; color: var(--text-primary); margin-top: 0.75rem;">
+            [Frontend Clients: Desktop / Tablet / Mobile (HTML5, Vanilla CSS, JS)]<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;│ REST JSON &amp; CORS<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;▼<br>
+            [Flask Monolithic Backend Service (Python 3.11+, PyMySQL, PyMongo)]<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;├── MySQL / SQLite Relational DB (Tasks, FAQs, Support Tickets)<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;├── MongoDB Document DB (Chat Logs, User Feedback)<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;├── External AI Service (Groq API Llama 3.3 / Gemini with local fallback)<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└── External Third-Party Joke API (with timeout &amp; fallback)
+          </div>
+        </div>
+
+        <div class="card">
+          <h2 style="font-size: 1.4rem;">🛠️ Technology Stack</h2>
+          <div style="display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 0.75rem;">
+            <span class="badge" style="background-color: var(--primary-light); color: var(--primary);">Python 3.11</span>
+            <span class="badge" style="background-color: var(--primary-light); color: var(--primary);">Flask 3.0</span>
+            <span class="badge" style="background-color: var(--primary-light); color: var(--primary);">MySQL 8.0</span>
+            <span class="badge" style="background-color: var(--primary-light); color: var(--primary);">MongoDB 7.0</span>
+            <span class="badge" style="background-color: var(--primary-light); color: var(--primary);">Vanilla HTML5 / CSS3 / JS</span>
+            <span class="badge" style="background-color: var(--primary-light); color: var(--primary);">Groq AI (Llama 3.3)</span>
+            <span class="badge" style="background-color: var(--primary-light); color: var(--primary);">PyMySQL</span>
+            <span class="badge" style="background-color: var(--primary-light); color: var(--primary);">PyMongo</span>
+            <span class="badge" style="background-color: var(--primary-light); color: var(--primary);">Pytest</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right Column: Student Assessment Profile Card -->
+      <div>
+        <div class="card" style="border-top: 4px solid var(--primary); position: sticky; top: 5.5rem;">
+          <h3 style="font-size: 1.15rem; margin-bottom: 1.25rem;">👨‍💻 Developer &amp; Project Info</h3>
+
+          <div style="margin-bottom: 1rem;">
+            <div style="font-size: 0.75rem; text-transform: uppercase; color: var(--text-muted); font-weight: 700;">Student Name</div>
+            <div style="font-size: 1.05rem; font-weight: 600; color: var(--text-primary);">[Student Name]</div>
+          </div>
+
+          <div style="margin-bottom: 1rem;">
+            <div style="font-size: 0.75rem; text-transform: uppercase; color: var(--text-muted); font-weight: 700;">Roll / Registration No.</div>
+            <div style="font-size: 1rem; color: var(--text-primary); font-family: monospace;">[Roll Number / Reg No]</div>
+          </div>
+
+          <div style="margin-bottom: 1rem;">
+            <div style="font-size: 0.75rem; text-transform: uppercase; color: var(--text-muted); font-weight: 700;">Department</div>
+            <div style="font-size: 0.95rem; color: var(--text-primary);">Department of Computer Science and Engineering</div>
+          </div>
+
+          <div style="margin-bottom: 1.25rem;">
+            <div style="font-size: 0.75rem; text-transform: uppercase; color: var(--text-muted); font-weight: 700;">Institution</div>
+            <div style="font-size: 0.95rem; color: var(--text-primary);">Kumaraguru College of Technology</div>
+          </div>
+
+          <div style="border-top: 1px solid var(--border); padding-top: 1rem;">
+            <a href="/health" target="_blank" class="btn btn-outline btn-sm" style="width: 100%;">
+              🩺 Check Backend Health (/health)
+            </a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="container footer-content">
+      <div>
+        <p style="margin: 0; font-weight: 600; color: var(--text-primary);">TaskMate — AI-Powered Task Manager</p>
+        <p style="margin: 0; font-size: 0.8rem; color: var(--text-muted);">Final Assessment Software Project</p>
+      </div>
+      <div style="display: flex; gap: 1.25rem; font-size: 0.85rem;">
+        <a href="/">Home</a>
+        <a href="/faq">FAQ</a>
+        <a href="/errors">Error Guide</a>
+        <a href="/about">About</a>
+        <a href="/health" target="_blank">System Health</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="/js/api.js"></script>
+  <script src="/js/app.js"></script>
+  <script src="/js/chat.js"></script>
+</body>
+</html>
