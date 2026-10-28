@@ -1,7 +1,15 @@
+import sys
 import os
 from pathlib import Path
+
+# Add project root to sys.path so 'backend.*' imports resolve cleanly in multi-service mode
+BASE_DIR = Path(__file__).resolve().parent.parent
+if str(BASE_DIR) not in sys.path:
+    sys.path.insert(0, str(BASE_DIR))
+
 from flask import Flask, send_from_directory, jsonify, request
 from flask_cors import CORS
+import requests
 from backend.config import Config
 from backend.logging_config import setup_logging
 from backend.task_routes import task_bp
@@ -12,7 +20,7 @@ from backend.chat_routes import chat_bp
 from backend.joke_routes import joke_bp
 from backend.health_routes import health_bp
 
-FRONTEND_DIR = Path(__file__).resolve().parent.parent / "frontend"
+FRONTEND_DIR = BASE_DIR / "frontend"
 
 def create_app():
     app = Flask(__name__, static_folder=str(FRONTEND_DIR))
@@ -24,14 +32,47 @@ def create_app():
     # Setup Request Logging
     setup_logging(app)
 
-    # Register Blueprints
-    app.register_blueprint(task_bp)
-    app.register_blueprint(faq_bp)
-    app.register_blueprint(ticket_bp)
-    app.register_blueprint(error_bp)
-    app.register_blueprint(chat_bp)
-    app.register_blueprint(joke_bp)
-    app.register_blueprint(health_bp)
+    # If Vercel Service Binding BACKEND_URL is set on the calling web/app service,
+    # forward API and health requests to the bound backend service
+    backend_url = Config.BACKEND_URL
+    if backend_url:
+        @app.route("/api/<path:subpath>", methods=["GET", "POST", "PUT", "PATCH", "DELETE"])
+        def proxy_api(subpath):
+            target_url = f"{backend_url}/api/{subpath}"
+            headers = {k: v for k, v in request.headers if k.lower() != "host"}
+            try:
+                resp = requests.request(
+                    method=request.method,
+                    url=target_url,
+                    headers=headers,
+                    data=request.get_data(),
+                    params=request.args,
+                    timeout=15.0
+                )
+                return (resp.content, resp.status_code, resp.headers.items())
+            except Exception as e:
+                return jsonify({
+                    "success": False,
+                    "error": {"code": "503", "message": f"Internal backend service unreachable: {e}"}
+                }), 503
+
+        @app.route("/health", methods=["GET"])
+        def proxy_health():
+            target_url = f"{backend_url}/health"
+            try:
+                resp = requests.get(target_url, timeout=5.0)
+                return (resp.content, resp.status_code, resp.headers.items())
+            except Exception as e:
+                return jsonify({"status": "degraded", "error": f"Backend health proxy error: {e}"}), 503
+    else:
+        # Register Blueprints locally (standalone/backend service mode)
+        app.register_blueprint(task_bp)
+        app.register_blueprint(faq_bp)
+        app.register_blueprint(ticket_bp)
+        app.register_blueprint(error_bp)
+        app.register_blueprint(chat_bp)
+        app.register_blueprint(joke_bp)
+        app.register_blueprint(health_bp)
 
     # Frontend Page Routes
     @app.route("/")

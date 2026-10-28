@@ -51,3 +51,6 @@ class Config:
 
     # Rate Limiting
     CHAT_RATE_LIMIT = int(os.getenv("CHAT_RATE_LIMIT", 30))
+
+    # Vercel Services Internal Binding
+    BACKEND_URL = os.getenv("BACKEND_URL", "").rstrip("/")
